@@ -7,12 +7,15 @@ import com.google.inject.servlet.GuiceServletContextListener;
 import com.googlecode.objectify.ObjectifyService;
 import com.squarespace.jersey2.guice.JerseyGuiceModule;
 import com.squarespace.jersey2.guice.JerseyGuiceUtils;
+import ro.visionapp.entities.Drawing;
+import ro.visionapp.entities.UserDto;
 
 public class GuiceConfig extends GuiceServletContextListener {
 
     static {
 
-        //ObjectifyService.register(Order.class);
+        ObjectifyService.register(UserDto.class);
+        ObjectifyService.register(Drawing.class);
     }
 
     @Override
