@@ -1,7 +1,12 @@
 package ro.visionapp.di;
 
-/**
- * Created by ioanag on 29/11/17.
- */
-public class ApplicationModule {
+import com.google.inject.AbstractModule;
+
+public class ApplicationModule extends AbstractModule {
+
+    @Override
+    protected void configure() {
+
+        //bind(OrderDAO.class).to(ro.foodApp.dao.impl.objectify.OrderDAOImpl.class);
+    }
 }

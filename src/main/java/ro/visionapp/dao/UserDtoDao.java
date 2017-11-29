@@ -1,7 +1,12 @@
 package ro.visionapp.dao;
 
-/**
- * Created by ioanag on 29/11/17.
- */
-public class UserDtoDao {
+
+import ro.visionapp.entities.UserDto;
+
+public interface UserDtoDao {
+
+    void save(UserDto user);
+
+    UserDto getUserById(String id);
+
 }

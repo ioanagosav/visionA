@@ -1,7 +1,13 @@
 package ro.visionapp.dao;
 
-/**
- * Created by ioanag on 29/11/17.
- */
-public class DrawingDao {
+import ro.visionapp.entities.Drawing;
+
+public interface DrawingDao {
+
+    void save(Drawing drawing);
+
+    Drawing getByUser(String userId);
+
+    Drawing getByName(String name);
+
 }
