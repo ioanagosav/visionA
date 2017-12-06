@@ -34,7 +34,6 @@ public class DrawingApi {
 //        Storage storage = StorageOptions.getDefaultInstance().getService();
 //        String bucketName = AppIdentityServiceFactory.getAppIdentityService().getDefaultGcsBucketName();
 //        String fileName = "test" + Math.floor(Math.random() * 100);
-//       //filePart.g
 //
 //        Blob blob =
 //                storage.create(
@@ -42,7 +41,7 @@ public class DrawingApi {
 //                        file);
 
 
-        // Instantiates a client
+        //Instantiates a client
         try {
             ImageAnnotatorClient vision = ImageAnnotatorClient.create();
             // The path to the image file to annotate
@@ -87,8 +86,6 @@ public class DrawingApi {
             }
         } catch (Exception e) {
             LOG.warning(e.getMessage());
-            LOG.warning(e.getStackTrace().toString());
-            LOG.warning(e.toString());
             LOG.log(Level.SEVERE, "ERROR", e);
         }
     }

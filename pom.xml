@@ -11,7 +11,7 @@
 
     <!-- [START set_versions] -->
     <properties>
-        <appengine.app.version>vision-1</appengine.app.version>
+        <appengine.app.version>vision-3</appengine.app.version>
         <appengine.sdk.version>1.9.59</appengine.sdk.version>
         <appengine.app.id>portal-staging</appengine.app.id>
 
@@ -30,17 +30,40 @@
 
     <dependencies>
         <!-- Compile/runtime dependencies -->
-        <dependency>
-            <groupId>io.netty</groupId>
-            <artifactId>netty-tcnative-boringssl-static</artifactId>
-            <version>2.0.7.Final</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>io.netty</groupId>-->
+            <!--<artifactId>netty-tcnative-boringssl-static</artifactId>-->
+            <!--<version>2.0.6.Final</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>com.google.apis</groupId>-->
+            <!--<artifactId>google-api-services-vision</artifactId>-->
+            <!--<version>v1-rev366-1.23.0</version>-->
+        <!--</dependency>-->
 
         <dependency>
             <groupId>com.google.cloud</groupId>
             <artifactId>google-cloud-vision</artifactId>
-            <version>LATEST</version>
+            <version>1.12.0</version>
         </dependency>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-tcnative-boringssl-static</artifactId>
+            <version>2.0.7.Final</version>
+            <scope>provided</scope>
+        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.mortbay.jetty.alpn</groupId>-->
+            <!--<artifactId>jetty-alpn-agent</artifactId>-->
+            <!--<version>2.0.6</version>-->
+        <!--</dependency>-->
+        <dependency>
+            <groupId>org.mortbay.jetty.alpn</groupId>
+            <artifactId>alpn-boot</artifactId>
+            <version>8.1.11.v20170118</version>
+            <scope>provided</scope>
+        </dependency>
+
         <dependency>
             <groupId>com.google.cloud</groupId>
             <artifactId>google-cloud-storage</artifactId>
@@ -227,20 +250,20 @@
         <!-- for hot reload of the web application-->
         <outputDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF/classes</outputDirectory>
         <plugins>
-            <!--<plugin>-->
-                <!--<groupId>org.codehaus.mojo</groupId>-->
-                <!--<artifactId>versions-maven-plugin</artifactId>-->
-                <!--<version>2.1</version>-->
-                <!--<executions>-->
-                    <!--<execution>-->
-                        <!--<phase>compile</phase>-->
-                        <!--<goals>-->
-                            <!--<goal>display-dependency-updates</goal>-->
-                            <!--<goal>display-plugin-updates</goal>-->
-                        <!--</goals>-->
-                    <!--</execution>-->
-                <!--</executions>-->
-            <!--</plugin>-->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>versions-maven-plugin</artifactId>
+                <version>2.1</version>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>display-dependency-updates</goal>
+                            <goal>display-plugin-updates</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <version>3.2</version>
@@ -266,33 +289,33 @@
                     </webResources>
                 </configuration>
             </plugin>
-            <!--<plugin>-->
-                <!--<groupId>org.apache.maven.plugins</groupId>-->
-                <!--<artifactId>maven-resources-plugin</artifactId>-->
-                <!--<version>3.0.1</version>-->
-                <!--<executions>-->
-                    <!--<execution>-->
-                        <!--<id>copy-ui</id>-->
-                        <!--<phase>generate-resources</phase>-->
-                        <!--<goals>-->
-                            <!--<goal>copy-resources</goal>-->
-                        <!--</goals>-->
-                        <!--<configuration>-->
-                            <!--<outputDirectory>${project.build.directory}/${project.build.finalName}/</outputDirectory>-->
-                            <!--<resources>-->
-                                <!--<resource>-->
-                                    <!--<directory>${basedir}/src/frontend/</directory>-->
-                                    <!--<filtering>false</filtering>-->
-                                    <!--<includes>-->
-                                        <!--<include>index.html</include>-->
-                                        <!--<include>js/visionapp.js</include>-->
-                                    <!--</includes>-->
-                                <!--</resource>-->
-                            <!--</resources>-->
-                        <!--</configuration>-->
-                    <!--</execution>-->
-                <!--</executions>-->
-            <!--</plugin>-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.0.1</version>
+                <executions>
+                    <execution>
+                        <id>copy-ui</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/${project.build.finalName}/</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${basedir}/src/frontend/</directory>
+                                    <filtering>false</filtering>
+                                    <includes>
+                                        <include>index.html</include>
+                                        <include>js/visionapp.js</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
 
             <plugin>
                 <groupId>com.google.appengine</groupId>
