@@ -11,14 +11,16 @@
 
     <!-- [START set_versions] -->
     <properties>
-        <appengine.app.version>1</appengine.app.version>
-        <appengine.sdk.version>1.9.48</appengine.sdk.version>
-        <appengine.app.id>id</appengine.app.id>
+        <appengine.app.version>vision-1</appengine.app.version>
+        <appengine.sdk.version>1.9.59</appengine.sdk.version>
+        <appengine.app.id>portal-staging</appengine.app.id>
 
         <objectify.version>5.1.5</objectify.version>
         <guava.version>18.0</guava.version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
 
     <prerequisites>
@@ -28,28 +30,43 @@
 
     <dependencies>
         <!-- Compile/runtime dependencies -->
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-tcnative-boringssl-static</artifactId>
+            <version>2.0.7.Final</version>
+        </dependency>
 
+        <dependency>
+            <groupId>com.google.cloud</groupId>
+            <artifactId>google-cloud-vision</artifactId>
+            <version>LATEST</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.cloud</groupId>
+            <artifactId>google-cloud-storage</artifactId>
+            <version>1.12.0</version>
+        </dependency>
         <dependency>
             <groupId>commons-validator</groupId>
             <artifactId>commons-validator</artifactId>
             <version>1.4.0</version>
         </dependency>
-
-        <!--<dependency>-->
-            <!--<groupId>javax.mail</groupId>-->
-            <!--<artifactId>mail</artifactId>-->
-            <!--<version>1.4.7</version>-->
-        <!--</dependency>-->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-nop</artifactId>
             <version>1.7.21</version>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>org.apache.commons</groupId>-->
-            <!--<artifactId>commons-lang3</artifactId>-->
-            <!--<version>3.5</version>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.5</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.5</version>
+        </dependency>
+
         <dependency>
             <groupId>joda-time</groupId>
             <artifactId>joda-time</artifactId>
@@ -109,6 +126,13 @@
             <artifactId>jersey-media-json-jackson</artifactId>
             <version>2.24.1</version>
         </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-multipart</artifactId>
+            <version>LATEST</version>
+            <scope>provided</scope>
+        </dependency>
+
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
@@ -173,29 +197,29 @@
             <artifactId>appengine-tools-sdk</artifactId>
             <version>${appengine.sdk.version}</version>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>com.google.appengine</groupId>-->
-            <!--<artifactId>appengine-testing</artifactId>-->
-            <!--<version>LATEST</version>-->
-            <!--<scope>test</scope>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>com.carlosbecker</groupId>-->
-            <!--<artifactId>guice-junit-test-runner</artifactId>-->
-            <!--<version>1.1</version>-->
-            <!--<scope>test</scope>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.mockito</groupId>-->
-            <!--<artifactId>mockito-core</artifactId>-->
-            <!--<version>2.2.26</version>-->
-            <!--<scope>test</scope>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.jetbrains</groupId>-->
-            <!--<artifactId>annotations-java5</artifactId>-->
-            <!--<version>RELEASE</version>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>com.google.appengine</groupId>
+            <artifactId>appengine-testing</artifactId>
+            <version>LATEST</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.carlosbecker</groupId>
+            <artifactId>guice-junit-test-runner</artifactId>
+            <version>1.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>2.2.26</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations-java5</artifactId>
+            <version>RELEASE</version>
+        </dependency>
 
     </dependencies>
 
@@ -203,27 +227,27 @@
         <!-- for hot reload of the web application-->
         <outputDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF/classes</outputDirectory>
         <plugins>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>versions-maven-plugin</artifactId>
-                <version>2.1</version>
-                <executions>
-                    <execution>
-                        <phase>compile</phase>
-                        <goals>
-                            <goal>display-dependency-updates</goal>
-                            <goal>display-plugin-updates</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+            <!--<plugin>-->
+                <!--<groupId>org.codehaus.mojo</groupId>-->
+                <!--<artifactId>versions-maven-plugin</artifactId>-->
+                <!--<version>2.1</version>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<phase>compile</phase>-->
+                        <!--<goals>-->
+                            <!--<goal>display-dependency-updates</goal>-->
+                            <!--<goal>display-plugin-updates</goal>-->
+                        <!--</goals>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+            <!--</plugin>-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <version>3.2</version>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                 </configuration>
             </plugin>
             <plugin>
@@ -261,12 +285,7 @@
                                     <!--<filtering>false</filtering>-->
                                     <!--<includes>-->
                                         <!--<include>index.html</include>-->
-                                        <!--<include>dist/app.js</include>-->
-                                        <!--<include>bower_components/semantic-ui/dist/semantic.min.css</include>-->
-                                        <!--<include>bower_components/semantic-ui/dist/semantic.min.js</include>-->
-                                        <!--<include>bower_components/jquery/dist/jquery.min.js</include>-->
-                                        <!--<include>bower_components/semantic-ui/dist/themes/default/**</include>-->
-                                        <!--<include>styles/*</include>-->
+                                        <!--<include>js/visionapp.js</include>-->
                                     <!--</includes>-->
                                 <!--</resource>-->
                             <!--</resources>-->

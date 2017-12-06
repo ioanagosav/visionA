@@ -9,7 +9,7 @@ public class CustomServletModule extends ServletModule {
     @Override
     public void configureServlets() {
         //filter("/*").through(CORSResponseFilter.class);
-        serve("oauth2callback/*").with(OAuth2Callback.class);
+        serve("/oauth2callback").with(OAuth2Callback.class);
         serve("/").with(AppengineAuth.class);
     }
 

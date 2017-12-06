@@ -51,7 +51,8 @@ public class AuthUtil {
     static GoogleClientSecrets getClientCredential() throws IOException {
         if (clientSecrets == null) {
             clientSecrets = GoogleClientSecrets.load(JSON_FACTORY,
-                    new InputStreamReader(AuthUtil.class.getResourceAsStream("/client_secrets.json")));
+                    new InputStreamReader(AuthUtil.class.getClassLoader().getResourceAsStream("/client_secrets.json")));
+
             Preconditions.checkArgument(!clientSecrets.getDetails().getClientId().startsWith("Enter ")
                             && !clientSecrets.getDetails().getClientSecret().startsWith("Enter "),
                     "Download client_secrets.json file from https://code.google.com/apis/console/"

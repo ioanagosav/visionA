@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+    <head>
+        <meta http-equiv=X-UA-Compatible content="IE=edge">
+        <meta charset=utf-8>
+        <meta name=description content="">
+
+        <!--<script src="js/visionapp.js"></script>-->
+    </head>
+
+    <body>
+
+    <h1> Hello, </h1> <h1 id="name"></h1>
+
+    <!--<form action="/rest/drawing/upload">-->
+    <!--<input type="file" name="pic" accept="image/*">-->
+    <!--<input type="submit">-->
+    <!--</form>-->
+
+    <!--<form method="POST" action="/rest/drawing/upload" enctype="multipart/form-data">-->
+    <!--<input type="file" name="file">-->
+    <!--<input type="submit">-->
+    <!--</form>-->
+
+    <form action="/rest/drawing/upload" method="post" enctype="multipart/form-data">
+
+        <p>
+            Select a file : <input type="file" name="file" size="45" />
+        </p>
+
+        <input type="submit" value="Upload It" />
+    </form>
+
+    <script>
+      function getUsername(){
+        const xhr = new XMLHttpRequest();
+        //http://localhost:8080/rest/user
+        xhr.open('GET', ' https://portal-staging.appspot.com/rest/user', false);
+        //xhr.setRequestHeader('Access-Control-Allow-Origin', '*')
+        xhr.send();
+        if (xhr.status === 200) {
+          return(JSON.parse(xhr.response));
+        } else {
+          err({"message": xhr.response});
+        }
+      }
+
+      function uploadImage(file){
+
+        //http://localhost:8080/rest/drawing/upload
+          const xhr = new XMLHttpRequest();
+        xhr.open('POST', 'https://portal-staging.appspot.com/rest/drawing/upload', file);
+        //xhr.setRequestHeader('Access-Control-Allow-Origin', '*')
+        xhr.send();
+        if (xhr.status === 200) {
+          //return(JSON.parse(xhr.response));
+        } else {
+          err({"message": xhr.response});
+        }
+
+      }
+
+      document.getElementById("name").innerHTML = getUsername().email;
+
+    </script>
+    </body>
+</html>

@@ -1,18 +1,35 @@
 package ro.visionapp.services;
 
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-
-@Path("/drawing")
+/**
+ * Created by ioanag on 06/12/17.
+ */
 public class DrawingService {
 
-
-    @POST
-    @Path("/save")
-    //@Consumes(MediaType.APPLICATION_JSON)
-    public void saveDrawing() {
-        //get logged in user using userService, put it in UserDTo, save it with userdao
-
-    }
-
+//    public static void detectLabels(String filePath, PrintStream out) throws Exception, IOException {
+//        List<AnnotateImageRequest> requests = new ArrayList<>();
+//
+//        ByteString imgBytes = ByteString.readFrom(new FileInputStream(filePath));
+//
+//        Image img = Image.newBuilder().setContent(imgBytes).build();
+//        Feature feat = Feature.newBuilder().setType(Type.LABEL_DETECTION).build();
+//        AnnotateImageRequest request =
+//                AnnotateImageRequest.newBuilder().addFeatures(feat).setImage(img).build();
+//        requests.add(request);
+//
+//        try (ImageAnnotatorClient client = ImageAnnotatorClient.create()) {
+//            BatchAnnotateImagesResponse response = client.batchAnnotateImages(requests);
+//            List<AnnotateImageResponse> responses = response.getResponsesList();
+//
+//            for (AnnotateImageResponse res : responses) {
+//                if (res.hasError()) {
+//                    out.printf("Error: %s\n", res.getError().getMessage());
+//                    return;
+//                }
+//
+//                // For full list of available annotations, see http://g.co/cloud/vision/docs
+//                for (EntityAnnotation annotation : res.getLabelAnnotationsList()) {
+//                    annotation.getAllFields().forEach((k, v) -> out.printf("%s : %s\n", k, v.toString()));
+//                }
+//            }
+//        }
 }
